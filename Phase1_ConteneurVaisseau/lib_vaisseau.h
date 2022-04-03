@@ -19,10 +19,10 @@
 
 struct Vaisseau {
 
-    char m_classe[32]               ; // Chaîne de caractères pouvant contenir 31 caractères maximum + le caractère de fin de chaîne '\0'
-    char m_nom[64]                  ; // Chaîne de caractères pouvant contenir 63 caractères maximum + le caractère de fin de chaîne '\0'
-    int m_resistance_coque ;
-    int m_puissance_feu    ;
+    char    m_classe[32]                ; // Chaîne de caractères pouvant contenir 31 caractères maximum + le caractère de fin de chaîne '\0'
+    char    m_nom[64]                   ; // Chaîne de caractères pouvant contenir 63 caractères maximum + le caractère de fin de chaîne '\0'
+    int     m_resistance_coque          ; // Nombre entier de points de résistance de coque ("points de vie")
+    int     m_puissance_feu             ; // Nombre entier de points de puissance de feu ("points d'attaque")
 } ;
 
 /**
@@ -52,6 +52,7 @@ void AffecterCarac (Vaisseau*, const char*, const int, const int) ;
 /*
     {
         R   :   Fonction permettant d'afficher toutes les caractéristiques d'un Vaisseau
+                => affiche un message dédié si le vaisseau est détruit (résistance de coque tombée à 0)
         E   :   1 pointeur sur Vaisseau (l'adresse de la variable Vaisseau dont on souhaite afficher les caractéristiques)
         E/S :   vide
         S   :   vide

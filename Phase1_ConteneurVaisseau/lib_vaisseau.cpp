@@ -47,24 +47,23 @@ using namespace std ;
 
     /* Algorithme local */
 
-    // Affectation de la classe du Vaisseau
-    strcpy(output_vaisseau->m_classe, "Vaisseau") ;
+    // Affectation de la classe du Vaisseau par appel de la fonction AffecterClasse
+    AffecterClasse(output_vaisseau, "Vaisseau") ;
 
-    // Affectation du nom du Vaisseau
-    strcpy(output_vaisseau->m_nom, input_nom) ;
-    /// La fonction STRCPY de la librairie CSTRING permet de copier une chaîne de caractères source (2ème argument E) dans une chaîne de caractères destination (1er argument E/S)
-    /// Attention la chaîne destination doit être assez longue (nombre de caractères suffisant) pour contenir la chaîne source
+    // Affectation du nom du Vaisseau par appel de la fonction AffecterNom
+    AffecterNom(output_vaisseau, input_nom) ;
 
-    // Affectation de la résistance de coque au Vaisseau
-    output_vaisseau->m_resistance_coque = input_coque ;
+    // Affectation de la résistance de coque au Vaisseau par appel de la fonction AffecterResistanceCoque
+    AffecterResistanceCoque(output_vaisseau, input_coque) ;
 
-    // Affectation de la puissance de feu au Vaisseau
-    output_vaisseau->m_puissance_feu = input_feu ;
+    // Affectation de la puissance de feu au Vaisseau par appel de la fonction AffecterPuissanceFeu
+    AffecterPuissanceFeu(output_vaisseau, input_feu) ;
  }
 
   /*
     {
         R   :   Fonction permettant d'afficher toutes les caractéristiques d'un Vaisseau
+                => affiche un message dédié si le vaisseau est détruit (résistance de coque tombée à 0)
         E   :   1 pointeur sur Vaisseau (l'adresse de la variable Vaisseau dont on souhaite afficher les caractéristiques)
         E/S :   vide
         S   :   vide
@@ -83,6 +82,12 @@ using namespace std ;
     cout << "\tVaisseau " << input_vaisseau->m_nom << " de classe " << input_vaisseau->m_classe << " : " << endl ;
     cout << "\t| Resistance de coque (" << input_vaisseau->m_resistance_coque << ")" << endl ;
     cout << "\t| Puissance de feu (" << input_vaisseau->m_puissance_feu << ")" << endl ;
+    if (input_vaisseau->m_resistance_coque <= 0)
+    {
+        cout << "\t| => %%%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl ;
+        cout << "\t| => %%%%% VAISSEAU DETRUIT %%%%%" << endl ;
+        cout << "\t| => %%%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl ;
+    }
     cout << "\t|_________________" << endl ;
     cout << "]" << endl ;
  }
@@ -111,6 +116,9 @@ void AffecterClasse (Vaisseau* output_vaisseau, const char* input_classe)
 
     // Affectation du nom du Vaisseau
     strcpy(output_vaisseau->m_classe, input_classe) ;
+    /// La fonction STRCPY de la librairie CSTRING permet de copier une chaîne de caractères source (2ème argument E)
+    /// dans une chaîne de caractères destination (1er argument E/S)
+    /// Attention la chaîne destination doit être assez longue (nombre de caractères suffisant) pour contenir la chaîne source
 }
 
  /*
