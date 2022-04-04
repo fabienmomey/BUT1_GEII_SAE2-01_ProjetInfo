@@ -89,7 +89,11 @@ void TestStructVaisseau2()
     ///         Si il y a eu dépassement, la saisie suivante récupère ce qui restait dans le buffer, il faut donc le vider avant toute nouvelle saisie.
     ///         En cas de dépassement, cin renvoie une erreur => on ne vide le buffer avant une prochaine saisie que dans ce cas
     ///         en faisant un "try ... catch" qui ne bloque pas l'exécution du programme après erreur.
-    cin.ignore();
+    // On vide le buffer d'entrée au préalable si il reste des caractères dans le buffer
+    if (cin.gcount()>0)
+    {
+        cin.ignore() ;
+    }
     cin.exceptions(std::ios_base::failbit); // may throw
 
     try {
@@ -148,13 +152,17 @@ void TestStructVaisseau3()
 
     /// Initialisation des caractéristiques du Vaisseau par appel à la fonction dédiée AffecterCarac avec des valeurs "en dur"
     cout << "Donnez un nom à votre vaisseau (63 caracteres maximum) : " << endl ;
-
     /// Saisie sécurisée d'une chaîne de caractères de longueur limitée
     ///     =>  La saisie "tronque" automatiquement la chaîne de caractères saisie si celle-ci dépasse le nombre de caractères maximal requis.
     ///         Si il y a eu dépassement, la saisie suivante récupère ce qui restait dans le buffer, il faut donc le vider avant toute nouvelle saisie.
     ///         En cas de dépassement, cin renvoie une erreur => on ne vide le buffer avant une prochaine saisie que dans ce cas
     ///         en faisant un "try ... catch" qui ne bloque pas l'exécution du programme après erreur.
-    cin.ignore();
+    cin.clear() ;
+    // On vide le buffer d'entrée au préalable si il reste des caractères dans le buffer
+    if (cin.gcount()>0)
+    {
+        cin.ignore() ;
+    }
     cin.exceptions(std::ios_base::failbit); // may throw
 
     try {
@@ -190,8 +198,7 @@ void TestStructVaisseau3()
 void TestStructVaisseau4()
 {
     /* Déclaration des variables locales */
-    const char* local_classe ;
-    const char* local_nom ;
+    char local_nom[64] = "" ;
     int local_coque ;
     int local_feu ;
 
@@ -215,29 +222,48 @@ void TestStructVaisseau4()
     /// => On doit donner l'adresse de la variable de type Vaisseau concernée comme 1er argument de la fonction AffecterCarac
     AffecterCarac(&faucon, "inconnu", 0, 0) ;
 
+    /// Initialisation des caractéristiques du Vaisseau par appel à la fonction dédiée AffecterCarac avec des valeurs "en dur"
+    cout << "Donnez un nom à votre vaisseau (63 caracteres maximum) : " << endl ;
+    /// Saisie sécurisée d'une chaîne de caractères de longueur limitée
+    ///     =>  La saisie "tronque" automatiquement la chaîne de caractères saisie si celle-ci dépasse le nombre de caractères maximal requis.
+    ///         Si il y a eu dépassement, la saisie suivante récupère ce qui restait dans le buffer, il faut donc le vider avant toute nouvelle saisie.
+    ///         En cas de dépassement, cin renvoie une erreur => on ne vide le buffer avant une prochaine saisie que dans ce cas
+    ///         en faisant un "try ... catch" qui ne bloque pas l'exécution du programme après erreur.
+    cin.clear() ;
+    // On vide le buffer d'entrée au préalable si il reste des caractères dans le buffer
+    if (cin.gcount()>0)
+    {
+        cin.ignore() ;
+    }
+    cin.exceptions(std::ios_base::failbit); // may throw
+
+    try {
+        cin.getline(local_nom, sizeof(local_nom)) ; // Permet de lire également les espaces éventuels dans le nom
+    } catch (const std::ios_base::failure& fail) {
+        // handle exception here
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    cout << "Donnez une resistance de coque à votre vaisseau : " << endl ;
+    cin >> local_coque ;
+    cout << "Donnez une puissance de feu à votre vaisseau : " << endl ;
+    cin >> local_feu ;
     /// Ré-affectation des caractéristiques du Vaisseau par appel aux fonctions dédiées AffecterNom, AffecterResistanceCoque
     /// et AffecterPuissanceFeu avec des valeurs "en dur"
     /// => On doit donner l'adresse de la variable de type Vaisseau concernée comme 1er argument de la fonction AffecterCarac
-    AffecterNom(&faucon, "faucon millenium") ;
-    AffecterResistanceCoque(&faucon, 1000) ;
-    AffecterPuissanceFeu(&faucon, 100) ;
+    AffecterNom(&faucon, local_nom) ;
+    AffecterResistanceCoque(&faucon, local_coque) ;
+    AffecterPuissanceFeu(&faucon, local_feu) ;
 
     /// Affichage des caractéristiques du Vaisseau déclaré pour vérification
     AfficherCarac(&faucon) ;
 
-    /// Récupération des valeurs des champs du Vaisseau par appel
-    /// aux fonctions dédiées RenvoyerClasse, RenvoyerNom,
-    /// RenvoyerResistanceCoque et RenvoyerPuissanceFeu
-    local_classe    = RenvoyerClasse(&faucon) ;
-    local_nom       = RenvoyerNom(&faucon) ;
-    local_coque     = RenvoyerResistanceCoque(&faucon) ;
-    local_feu       = RenvoyerPuissanceFeu(&faucon) ;
-
-    /// Affichage des caractéristiques du Vaisseau déclaré à partir de valeurs récupérées
+    /// Affichage des caractéristiques du Vaisseau déclaré à partir de valeurs renvoyées par les fonctions Renvoyer... dédiées
     cout << "[" << endl ;
-    cout << "\tVaisseau " << local_nom << " de classe " << local_classe << " : " << endl ;
-    cout << "\t| Resistance de coque (" << local_coque << ")" << endl ;
-    cout << "\t| Puissance de feu (" << local_feu << ")" << endl ;
+    cout << "\tVaisseau " << RenvoyerNom(&faucon) << " de classe " << RenvoyerClasse(&faucon) << " : " << endl ;
+    cout << "\t| Resistance de coque (" << RenvoyerResistanceCoque(&faucon) << ")" << endl ;
+    cout << "\t| Puissance de feu (" << RenvoyerPuissanceFeu(&faucon) << ")" << endl ;
     cout << "\t|_________________" << endl ;
     cout << "]" << endl ;
 }
