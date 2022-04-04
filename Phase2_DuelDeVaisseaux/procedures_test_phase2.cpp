@@ -1,4 +1,5 @@
 #include <iostream>
+#include "moteur_de_jeu.h"
 #include "lib_vaisseau2.h"
 #include "procedures_test_phase2.h"
 
@@ -31,7 +32,7 @@ void TestDuelVaisseau1()
     cout << "|*****************************************|" << endl ;
     cout << "|*********** TestDuelVaisseau1 ***********|" << endl ;
     cout << "|=> test de la fonction d'encaissement    |" << endl ;
-    cout << "|   de dégâts par un Vaisseau cible       |" << endl ;
+    cout << "|   de degats par un Vaisseau cible       |" << endl ;
     cout << "|   SubirDegatsCoque.                     |" << endl ;
     cout << "|*****************************************|" << endl << endl ;
 
@@ -93,12 +94,12 @@ void TestDuelVaisseau2()
     cout << "|*****************************************|" << endl ;
     cout << "|*********** TestDuelVaisseau2 ***********|" << endl ;
     cout << "|=> test de la fonction d'encaissement    |" << endl ;
-    cout << "|   de dégâts par un Vaisseau cible       |" << endl ;
+    cout << "|   de degats par un Vaisseau cible       |" << endl ;
     cout << "|   SubirDegatsCoque.                     |" << endl ;
-    cout << "|=> valeur de dégâts saisie               |" << endl ;
+    cout << "|=> valeur de degats saisie               |" << endl ;
     cout << "|   par l'utilisateur                     |" << endl ;
     cout << "|=> boucle tant que le Vaisseau cible     |" << endl ;
-    cout << "|   n'est pas détruit ...                 |" << endl ;
+    cout << "|   n'est pas detruit ...                 |" << endl ;
     cout << "|*****************************************|" << endl << endl ;
 
     /// Initialisation des caractéristiques du Vaisseau par appel à la fonction dédiée AffecterCarac avec des valeurs "en dur"
@@ -109,10 +110,13 @@ void TestDuelVaisseau2()
     AfficherCarac(&faucon) ;
 
     /// Boucle tant que le Vaisseau cible n'est pas détruit ...
-    while (RenvoyerResistanceCoque(&faucon) > 0)
+    do
     {
+        /// Attente démarrage nouveau round
+        GetReady4NextRound() ;
+
         /// Saisie des dégâts à infliger au Vaisseau cible
-        cout << "Saisir les dégâts à infliger au Vaisseau cible : " << endl ;
+        cout << "Saisir les degats a infliger au Vaisseau cible : " << endl ;
         cin >> local_degats ;
 
         /// Appel de la fonction d'encaissement de dégâts SubirDegatsCoque par la Vaisseau cible
@@ -126,7 +130,10 @@ void TestDuelVaisseau2()
 
         /// Affichage des caractéristiques du Vaisseau déclaré pour vérification
         AfficherCarac(&faucon) ;
-    }
+
+    } while (RenvoyerResistanceCoque(&faucon) > 0) ;
+
+    GameOver() ;
 }
 
 /*
@@ -152,11 +159,11 @@ void TestDuelVaisseau3()
     cout << "|*****************************************|" << endl ;
     cout << "|*********** TestDuelVaisseau2 ***********|" << endl ;
     cout << "|=> test d'un Vaisseau en attaquant       |" << endl ;
-    cout << "|   un autre (les dégâts infligés par     |" << endl ;
-    cout << "|   l'attaquant sont égaux à sa puissance |" << endl ;
+    cout << "|   un autre (les dzgats infligés par     |" << endl ;
+    cout << "|   l'attaquant sont egaux a sa puissance |" << endl ;
     cout << "|   de feu)                               |" << endl ;
     cout << "|=> boucle tant que le Vaisseau cible     |" << endl ;
-    cout << "|   n'est pas détruit ...                 |" << endl ;
+    cout << "|   n'est pas detruit ...                 |" << endl ;
     cout << "|*****************************************|" << endl << endl ;
 
     /// Saisie des caractéristiques (coque et puissance) de chaque Vaisseau
@@ -181,8 +188,11 @@ void TestDuelVaisseau3()
     AfficherCarac(&cible) ;
 
     /// Boucle tant que le Vaisseau cible n'est pas détruit ...
-    while (RenvoyerResistanceCoque(&cible) > 0)
+    do
     {
+        /// Attente démarrage nouveau round
+        GetReady4NextRound() ;
+
         /// Appel de la fonction d'encaissement de dégâts SubirDegatsCoque par la Vaisseau cible
         cout << endl << "[" << endl ;
         cout << "\tVaisseau " << RenvoyerNom(&cible) << " de classe " << RenvoyerClasse(&cible) << " : " << endl ;
@@ -195,5 +205,8 @@ void TestDuelVaisseau3()
 
         /// Affichage des caractéristiques du Vaisseau cible
         AfficherCarac(&cible) ;
-    }
+
+    } while (RenvoyerResistanceCoque(&cible) > 0) ;
+
+    GameOver() ;
 }
