@@ -157,8 +157,15 @@ void AffecterClasse (Vaisseau* output_vaisseau, const char* input_classe)
 
     /* Algorithme local */
 
-    // Affectation de la résistance de coque au Vaisseau
-    output_vaisseau->m_resistance_coque = input_coque ;
+    // Affectation de la résistance de coque au Vaisseau (mise à zéro en cas de valeur négative)
+    if (input_coque >= 0)
+    {
+        output_vaisseau->m_resistance_coque = input_coque ;
+    }
+    else
+    {
+        output_vaisseau->m_resistance_coque = 0 ;
+    }
  }
 
  /*
@@ -177,8 +184,15 @@ void AffecterClasse (Vaisseau* output_vaisseau, const char* input_classe)
 
     /* Algorithme local */
 
-    // Affectation de la puissance de feu au Vaisseau
-    output_vaisseau->m_puissance_feu = input_feu ;
+    // Affectation de la puissance de feu au Vaisseau (mise à zéro en cas de valeur négative)
+    if (input_feu >= 0)
+    {
+        output_vaisseau->m_puissance_feu = input_feu ;
+    }
+    else
+    {
+        output_vaisseau->m_puissance_feu = 0 ;
+    }
  }
 
 /*
