@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="73.099663mm"
+   height="34.385391mm"
+   viewBox="0 0 73.099662 34.385391"
+   version="1.1"
+   id="svg6924"
+   inkscape:version="1.1.2 (1:1.1+202202050950+0a00cf5339)"
+   sodipodi:docname="moteur_visee.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview6926"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="2.9433782"
+     inkscape:cx="136.9175"
+     inkscape:cy="84.766544"
+     inkscape:window-width="1920"
+     inkscape:window-height="972"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs6921">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path7187" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path7187-6" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-85.22361,-93.171628)">
+    <image
+       width="38.099998"
+       height="18.520834"
+       preserveAspectRatio="none"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAABGCAYAAAAjIR2KAAAABHNCSVQICAgIfAhkiAAAAV5JREFU
+eJzt3VFqg0AUhtGhZBfuOzucdbQPUpqU0aT9FRzuOTAPkTIP8hGrF2K73++frTXL+tf6aBAQEBEB
+ESkVUO996v2vqFRAHE9ARARE5Pb4YXQNX5Zl+uNbZtn/asefVHqQ2Hufev8rLpcwIgIiIiAipQLa
++4d3hv2vqFRAHE9ARAREZBhQxaHgiPOw2jsPvoE29N43n8byQ0AD3/G0tv1In5WABn7fjle8PX+X
+gIgIiIiAiAiIiICIDANy18GjvR58AxEREBEBETFM3eE8rAxTOY2AiAiIiICICIiIgIgIiIiAiBim
+7nAeVoapnEZARARExDCVlwxTOY2AiAiIyO31n9Tz15/zrUxAA2J5n0sYEQERERARw1ReMkzlNAIi
+IiAipQLyztTjlQqI4wmIiICIeGfqBPtf7fgT70ydZ/8rLpcwIgIiIiAipQLyztTjlQqI4wmIiICI
+CIjIF0LVcFAyTqQ2AAAAAElFTkSuQmCC
+"
+       id="image6993"
+       x="85.22361"
+       y="109.03619" />
+    <ellipse
+       style="fill:none;stroke:#c86400;stroke-width:1.05833;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path7019"
+       cx="104.23499"
+       cy="117.77774"
+       rx="4.3561244"
+       ry="5.4851747" />
+    <path
+       style="fill:none;stroke:#c86400;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Send)"
+       d="m 122.24727,102.15816 c -11.89825,11.47232 -11.89825,11.47232 -11.89825,11.47232"
+       id="path7054" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1;font-family:Gentium;-inkscape-font-specification:Gentium;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="123.29681"
+       y="96.778175"
+       id="text10852"><tspan
+         sodipodi:role="line"
+         id="tspan10850"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="123.29681"
+         y="96.778175">curseur de visée </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="123.29681"
+         y="101.01151"
+         id="tspan12678">en mouvement</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="123.29681"
+         y="105.24483"
+         id="tspan35621">dans le champ de tir</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1;font-family:Gentium;-inkscape-font-specification:Gentium;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.264583"
+       x="104.0553"
+       y="96.375565"
+       id="text10852-3"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="104.0553"
+         y="96.375565"
+         id="tspan12678-6">zone de réussite </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="104.0553"
+         y="100.60889"
+         id="tspan29787">du tir</tspan></text>
+    <path
+       style="fill:none;stroke:#c86400;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Send)"
+       d="m 100.92393,101.24124 v 6.73934"
+       id="path28431" />
+    <path
+       style="fill:none;stroke:#c86400;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Send)"
+       d="m 107.48305,101.24124 v 6.73934"
+       id="path28431-5" />
+  </g>
+</svg>
