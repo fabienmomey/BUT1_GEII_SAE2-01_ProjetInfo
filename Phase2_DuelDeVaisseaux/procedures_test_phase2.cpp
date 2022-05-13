@@ -6,21 +6,11 @@
 using namespace std ;
 
 /**
-    ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-    | Définition de la librairie de procédures de test permettant de valider les nouvelles fonctionnalités de gestionn d'un duel de vaisseaux (phase 2 du projet) |
-    ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------
+    | Définition de la librairie de procédures de test permettant de valider les nouvelles fonctionnalités de gestion d'un duel de vaisseaux (phase 2 du projet) |
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------
  **/
 
-/*
-    {
-        R   : Procédure de test global n°1 de gestion d'un duel de vaisseaux (phase 1 du projet)
-              => test de la fonction d'encaissement de dégâts par un Vaisseau cible SubirDegatsCoque
-        E   : vide
-        E/S : vide
-        S   : vide
-    }
-    TestDuelVaisseau1  : la fonction (vide) -> vide
-*/
 void TestDuelVaisseau1()
 {
     /* Déclaration des variables locales */
@@ -71,18 +61,6 @@ void TestDuelVaisseau1()
     AfficherCarac(&faucon) ;
 }
 
-/*
-    {
-        R   : Procédure de test global n°2 de gestion d'un duel de vaisseaux (phase 1 du projet)
-              => test de la fonction d'encaissement de dégâts par un Vaisseau cible SubirDegatsCoque
-              => valeur de dégâts saisie par l'utilisateur
-              => boucle tant que le Vaisseau cible n'est pas détruit ...
-        E   : vide
-        E/S : vide
-        S   : vide
-    }
-    TestDuelVaisseau2  : la fonction (vide) -> vide
-*/
 void TestDuelVaisseau2()
 {
     /* Déclaration des variables locales */
@@ -136,17 +114,6 @@ void TestDuelVaisseau2()
     GameOver() ;
 }
 
-/*
-    {
-        R   : Procédure de test global n°2 de gestion d'un duel de vaisseaux (phase 1 du projet)
-              => test d'un Vaisseau en attaquant un autre (les dégâts infligés par l'attaquant sont égaux à sa puissance de feu)
-              => boucle tant que le Vaisseau cible n'est pas détruit ...
-        E   : vide
-        E/S : vide
-        S   : vide
-    }
-    TestDuelVaisseau3  : la fonction (vide) -> vide
-*/
 void TestDuelVaisseau3()
 {
     /* Déclaration des variables locales */
@@ -159,7 +126,7 @@ void TestDuelVaisseau3()
     cout << "|*****************************************|" << endl ;
     cout << "|*********** TestDuelVaisseau2 ***********|" << endl ;
     cout << "|=> test d'un Vaisseau en attaquant       |" << endl ;
-    cout << "|   un autre (les dzgats infligés par     |" << endl ;
+    cout << "|   un autre (les degats infligés par     |" << endl ;
     cout << "|   l'attaquant sont egaux a sa puissance |" << endl ;
     cout << "|   de feu)                               |" << endl ;
     cout << "|=> boucle tant que le Vaisseau cible     |" << endl ;

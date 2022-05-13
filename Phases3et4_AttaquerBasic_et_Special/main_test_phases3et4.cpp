@@ -1,6 +1,6 @@
 #include <iostream>
-#include "lib_vaisseau2.h"
-#include "procedures_test_phase2.h"
+#include "lib_vaisseau3.h"
+#include "procedures_test_phases3et4.h"
 
 using namespace std;
 
@@ -11,11 +11,9 @@ int main()
 
     /* Algorithme principal (appel des procédures de test) */
 
-    TestDuelVaisseau1() ;
+    // TestAttaquerBasic() ;
 
-    //TestDuelVaisseau2() ;
-
-    //TestDuelVaisseau3() ;
+    TestAttaquerSpecial() ;
 
     return 0;
 }

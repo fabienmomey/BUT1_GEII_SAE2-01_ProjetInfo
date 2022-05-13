@@ -2,7 +2,7 @@
 #include <limits>
 #include <windows.h>
 #include "moteur_de_jeu.h"
-#include "lib_vaisseau2.h"
+#include "lib_vaisseau3.h"
 
 /**
     ---------------------------------------------------------------------------------
@@ -34,13 +34,24 @@ void AfficherVaisseauVainqueur(const Vaisseau*) ;
 
 /*
     {
+        R : Fonction d'annonce du Vaisseau assaillant et de demande de choix d'attaque
+            => 1 pour Basic ; 2 pour Special
+        E : 1 pointeur sur Vaisseau (l'adresse du Vaisseau assaillant)
+        E/S : vide
+        S : 1 entier non signé sur 1 octet (caractère) (le choix d'attaque)
+    }
+*/
+unsigned char ChoisirAttaque(const Vaisseau*) ;
+
+/*
+    {
         R : Fonction d'annonce du Vaisseau assaillant (attente d'un appui sur la touche [Echap])
         E : 1 pointeur sur Vaisseau (l'adresse du Vaisseau assaillant)
         E/S : vide
         S : vide
     }
 */
-void NextPlayer(const Vaisseau*) ;
+void PresenterVaisseauAttaquant(const Vaisseau*) ;
 /// Cette fonction s'intègre au moteur de jeu
 
 using namespace std;
@@ -49,8 +60,15 @@ int main()
 {
     /* Déclaration des variables principales */
     bool flag_tour_joueur = 0 ; // variable indiquant le tour du joueur courant (false : joueur 1 ; true : joueur 2)
+    unsigned char choix_attaque_tour ;
     /// Déclaration des 2 vaisseaux pour le duel
     Vaisseau vaisseau_j1, vaisseau_j2 ;
+    /// Déclaration de 2 pointeurs sur Vaisseau
+    /// qui recevront respectivement à chaque tour
+    /// l'adresse du joueur attaquant (le joueur dont c'est le tour)
+    /// et l'adresse du joueur cible,
+    Vaisseau* vaisseau_attaquant_tour ;
+    Vaisseau* vaisseau_cible_tour ;
 
     /* Algorithme principal (le duel de vaisseaux) */
     /// Initialisation des 2 vaisseaux pour le duel
@@ -72,46 +90,49 @@ int main()
         /// Attente démarrage nouveau round
         GetReady4NextRound() ;
 
-        if (!flag_tour_joueur)      /// Tour du joueur 1
+        /// Attribution des "rôles" pour le tour de jeu
+        /// - Qui est l'attaquant ?
+        /// - Qui est la cible ?
+        if (!flag_tour_joueur)      /// Tour du joueur 1 : le joueur 1 est l'attaquant / le joueur 2 est la cible
         {
-            NextPlayer(&vaisseau_j1) ;
-            /// Le vaisseau du joueur 2 encaisse des dégâts égaux à la puissance de feu du vaisseau du joueur 1
-            cout << endl << endl ;
-            cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl ;
-            if (Assaut())
+            vaisseau_attaquant_tour = &vaisseau_j1 ;
+            vaisseau_cible_tour = &vaisseau_j2 ;
+        }
+        else                        /// Tour du joueur 2 : le joueur 2 est l'attaquant / le joueur 1 est la cible
+        {
+            vaisseau_attaquant_tour = &vaisseau_j2 ;
+            vaisseau_cible_tour = &vaisseau_j1 ;
+        }
+
+        /// Annonce de l'attaquant et demande de choix d'attaque
+        choix_attaque_tour = ChoisirAttaque(vaisseau_attaquant_tour) ;
+        PresenterVaisseauAttaquant(vaisseau_attaquant_tour) ;
+        /// Le vaisseau du joueur attaquant attaque le vaisseau du joueur cible
+        cout << endl << endl ;
+        cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl ;
+        if (Assaut())
+        {
+            /// Déclenchement de l'attaque sélectionnée
+            if (choix_attaque_tour == 1)
             {
-                SubirDegatsCoque(&vaisseau_j2, RenvoyerPuissanceFeu(&vaisseau_j1)) ;
-                cout << "LE VAISSEAU " << RenvoyerNom(&vaisseau_j2) << " ENCAISSE " <<  RenvoyerPuissanceFeu(&vaisseau_j1) << " DEGATS DE COQUE." << endl ;
+                AttaquerBasic(vaisseau_attaquant_tour, vaisseau_cible_tour) ;
             }
             else
             {
-                cout << "LE VAISSEAU " << RenvoyerNom(&vaisseau_j1) << " MANQUE SA CIBLE." << endl ;
+                AttaquerSpecial(vaisseau_attaquant_tour, vaisseau_cible_tour) ;
             }
-            // On affiche le nouvel état du vaisseau cible
-            AfficherCarac(&vaisseau_j2) ;
-            cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl ;
-            cout << endl << endl ;
+            cout << "LE VAISSEAU " << RenvoyerNom(vaisseau_cible_tour) << " ENCAISSE " <<  RenvoyerPuissanceFeu(vaisseau_attaquant_tour) << " DEGATS DE COQUE." << endl ;
         }
-        else                        /// Tour du joueur 2
+        else
         {
-            NextPlayer(&vaisseau_j2) ;
-            /// Le vaisseau du joueur 1 encaisse des dégâts égaux à la puissance de feu du vaisseau du joueur 2
-            cout << endl << endl ;
-            cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl ;
-            if (Assaut())
-            {
-                SubirDegatsCoque(&vaisseau_j1, RenvoyerPuissanceFeu(&vaisseau_j2)) ;
-                cout << "LE VAISSEAU " << RenvoyerNom(&vaisseau_j1) << " ENCAISSE " <<  RenvoyerPuissanceFeu(&vaisseau_j2) << " DEGATS DE COQUE." << endl ;
-            }
-            else
-            {
-                cout << "LE VAISSEAU " << RenvoyerNom(&vaisseau_j2) << " MANQUE SA CIBLE." << endl ;
-            }
-            // On affiche le nouvel état du vaisseau
-            AfficherCarac(&vaisseau_j1) ;
-            cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl ;
-            cout << endl << endl ;
+            cout << "LE VAISSEAU " << RenvoyerNom(vaisseau_attaquant_tour) << " MANQUE SA CIBLE." << endl ;
         }
+        // On affiche le nouvel état du vaisseau cible
+        cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl ;
+        cout << "ETAT DU VAISSEAU CIBLE" << endl ;
+        AfficherCarac(vaisseau_cible_tour) ;
+        cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl ;
+        cout << endl << endl ;
 
         /// Changement de joueur ("inversion de valeur" du booléen)
         flag_tour_joueur = !flag_tour_joueur ;
@@ -119,17 +140,9 @@ int main()
     while ( (RenvoyerResistanceCoque(&vaisseau_j1) > 0) && (RenvoyerResistanceCoque(&vaisseau_j2) > 0) ) ;
 
     /// Désignation du vainqueur
-    // Le dernier vaisseau à avoir encaissé des dégâts de l'adversaire est détruit en sortie de boucle => il est le perdant
-    if (flag_tour_joueur)
-    {
-        /// Le vaisseau du joueur 1 est vainqueur
-        AfficherVaisseauVainqueur(&vaisseau_j1) ;
-    }
-    else
-    {
-        /// Le vaisseau du joueur 2 est vainqueur
-        AfficherVaisseauVainqueur(&vaisseau_j2) ;
-    }
+    /// Le dernier vaisseau à avoir encaissé des dégâts de l'adversaire est détruit en sortie de boucle => il est le perdant
+    /// Le vaisseau du dernier joueur attaquant est donc vainqueur
+    AfficherVaisseauVainqueur(vaisseau_attaquant_tour) ;
 
     GameOver() ;
 
@@ -198,8 +211,32 @@ void AfficherVaisseauVainqueur(const Vaisseau* input_vaisseau)
     cout << endl << endl ;
 }
 
-void NextPlayer(const Vaisseau* input_vaisseau)
+unsigned char ChoisirAttaque(const Vaisseau* input_vaisseau)
 {
+    /* Déclaration des variables locales */
+    unsigned char local_choix = 0 ;
+
+    /* Algorithme local à la fonction */
+    do {
+        cout << endl << endl ;
+        cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl ;
+        cout << "VAISSEAU " << RenvoyerNom(input_vaisseau) << " DEVIENT L'ATTAQUANT" << endl ;
+        cout << "Choisissez votre attaque: 1 pour Basic ; 2 pour Special" << endl ;
+        cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl ;
+        cout << endl << endl ;
+
+        cin >> local_choix ;
+    } while (local_choix != 1 && local_choix != 2) ; // Tant qu'on n'a pas saisi une attaque valide
+
+    // Renvoi du choix d'attaque
+    return local_choix ;
+}
+
+void PresenterVaisseauAttaquant(const Vaisseau* input_vaisseau)
+{
+    /* Déclaration des variables locales */
+    // Aucune variable locale à déclarer
+
     /* Algorithme local à la fonction */
     cout << endl << endl ;
     cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl ;
@@ -212,4 +249,3 @@ void NextPlayer(const Vaisseau* input_vaisseau)
     // On "vide" le buffer de scrutation d'appui sur la touche [Echap]
     while(GetAsyncKeyState(VK_ESCAPE));
 }
-

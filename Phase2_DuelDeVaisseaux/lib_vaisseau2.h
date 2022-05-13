@@ -21,4 +21,4 @@
 */
 void SubirDegatsCoque (Vaisseau*, const int) ;
 
-#endif // LIB_VAISSEAU2_H_INCLUDED
+#endif // LIB_VAISSEAU3_H_INCLUDED
