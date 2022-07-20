@@ -41,7 +41,7 @@ void AfficherVaisseauVainqueur(const Vaisseau*) ;
         S : 1 entier non signé sur 1 octet (caractère) (le choix d'attaque)
     }
 */
-unsigned char ChoisirAttaque(const Vaisseau*) ;
+unsigned int ChoisirAttaque(const Vaisseau*) ;
 
 /*
     {
@@ -60,7 +60,7 @@ int main()
 {
     /* Déclaration des variables principales */
     bool flag_tour_joueur = 0 ; // variable indiquant le tour du joueur courant (false : joueur 1 ; true : joueur 2)
-    unsigned char choix_attaque_tour ;
+    unsigned int choix_attaque_tour ;
     /// Déclaration des 2 vaisseaux pour le duel
     Vaisseau vaisseau_j1, vaisseau_j2 ;
     /// Déclaration de 2 pointeurs sur Vaisseau
@@ -121,11 +121,12 @@ int main()
             {
                 AttaquerSpecial(vaisseau_attaquant_tour, vaisseau_cible_tour) ;
             }
-            cout << "LE VAISSEAU " << RenvoyerNom(vaisseau_cible_tour) << " ENCAISSE " <<  RenvoyerPuissanceFeu(vaisseau_attaquant_tour) << " DEGATS DE COQUE." << endl ;
+            cout << "LE VAISSEAU " << RenvoyerNom(vaisseau_attaquant_tour) << " TOUCHE SA CIBLE." << endl ;
+            cout << "LE VAISSEAU " << RenvoyerNom(vaisseau_cible_tour) << " ENCAISSE " <<  RenvoyerPuissanceFeu(vaisseau_attaquant_tour) << " DEGATS DE COQUE." << endl << endl ;
         }
         else
         {
-            cout << "LE VAISSEAU " << RenvoyerNom(vaisseau_attaquant_tour) << " MANQUE SA CIBLE." << endl ;
+            cout << "LE VAISSEAU " << RenvoyerNom(vaisseau_attaquant_tour) << " MANQUE SA CIBLE." << endl << endl ;
         }
         // On affiche le nouvel état du vaisseau cible
         cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl ;
@@ -211,10 +212,10 @@ void AfficherVaisseauVainqueur(const Vaisseau* input_vaisseau)
     cout << endl << endl ;
 }
 
-unsigned char ChoisirAttaque(const Vaisseau* input_vaisseau)
+unsigned int ChoisirAttaque(const Vaisseau* input_vaisseau)
 {
     /* Déclaration des variables locales */
-    unsigned char local_choix = 0 ;
+    unsigned int local_choix = 0 ;
 
     /* Algorithme local à la fonction */
     do {
@@ -227,6 +228,21 @@ unsigned char ChoisirAttaque(const Vaisseau* input_vaisseau)
 
         cin >> local_choix ;
     } while (local_choix != 1 && local_choix != 2) ; // Tant qu'on n'a pas saisi une attaque valide
+
+    cout << endl << endl ;
+    cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl ;
+    cout << "VAISSEAU " << RenvoyerNom(input_vaisseau) << " A CHOISI " ;
+    switch (local_choix)
+    {
+    case 1:
+        cout << "UNE ATTAQUE BASIQUE." << endl ;
+        break ;
+    case 2:
+        cout << "UNE ATTAQUE SPECIALE." << endl ;
+        break ;
+    }
+    cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl ;
+    cout << endl << endl ;
 
     // Renvoi du choix d'attaque
     return local_choix ;

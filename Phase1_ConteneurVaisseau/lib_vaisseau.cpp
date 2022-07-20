@@ -52,7 +52,7 @@ void AfficherCarac (const Vaisseau* input_vaisseau)
     cout << "\t| Puissance de feu (" << input_vaisseau->m_puissance_feu << ")" << endl ;
     if (input_vaisseau->m_resistance_coque <= 0)
     {
-        cout << "\t| => %%%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl ;
+        cout << "\t| => ****************************" << endl ;
         cout << "\t| => %%%%% VAISSEAU DETRUIT %%%%%" << endl ;
         cout << "\t| => %%%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl ;
     }
