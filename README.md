@@ -1,4 +1,4 @@
-# BUT1_GEII_SAeInfo_ProjetVaisseau
+#  BUT1_GEII_SAE2-01_ProjetInfo
 Projet SAé d'informatique du BUT1 GEII - Création d'une application C++ simulant des batailles de vaisseaux
 
 Le code est organisé phase par phase. À chaque nouvelle phase, des fichiers sources sont ajoutés mais le code global dépend des sources des phases précédentes. Il peut y avoir plusieurs "main" pour une même phase : des programmes de test et des programmes "de jeu".
